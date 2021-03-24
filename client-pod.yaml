@@ -1,0 +1,12 @@
+apiVersion: v1 # Just to show an example on how to create a Pod object. But our setup, we are going to use a Deployment object, so this Pod object is no longer necessary
+kind: Pod
+metadata:
+  name: client-pod # The name and the kind are the indetifiers of the pod in the cluster.
+  labels:
+    component: web # Arbitrary key value pair that is used by the service object's selector to link the service to the pod (it can be anything, e.g. tier: bla)
+spec:
+  containers:
+      - name: client
+        image: safeyhalim/multi-worker
+        ports:
+          - containerPort: 9999

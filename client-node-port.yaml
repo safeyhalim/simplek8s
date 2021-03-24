@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-node-port
+spec:
+  type: NodePort # Aim is to expose a container to the outside world
+  ports:
+    - port: 3050 # The port number through which any other pod in the cluster can access the pointed to pod by this NodePort service
+      targetPort: 3000 # (similar to the containerPort in the pointed to pod configuration): The port exposed by the container in the pointed-to pod by this NodePort service
+      nodePort: 31515 # The port exposed by this NodePort service to the outside world (the port through which we can access the container in the pointed-to pod by this NodePort service)
+  selector: # Key value pair whose aim is to point the service to a target object (e.g. a certain pod or a pod defined by a template in a deployment) (in this case, it points this NodePort service to the client-pod which has a label with the same name:value pair)
+    component: web
