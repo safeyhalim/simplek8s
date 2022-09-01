@@ -1,10 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # A Deployment maintains a set of IDENTICAL pods ensuring that they have the correct config and that the right number of these pods exists
 metadata:
   name: client-deployment # name of the deployment object
 spec:
   replicas: 1 # The number of identical pods this deployment creates (remember: the deployment can create a set of identical pods)
-  selector: # Similar to the selector property in the service object. It's used by the deployment as a handle to be able to reference the pod defined in the template. It's redundant because the template itself also has labels, but it could be possible that the template have multiple labels, that's why the selector should also have one that matches one of the labels defined by the template
+  selector: # Similar to the selector property in the service object. It's used by the deployment as a handle to be able to reference the pod defined in the template. It's redundant because the template itself also has labels, but it could be possible that the template has multiple labels, that's why the selector should also have one that matches one of the labels defined by the template
     matchLabels:
       component: web
   template: # Configuration of every single pod that is going to be created by this deployment (content of the template configuration is almost identical to the configuration of a Pod object)
